@@ -3,920 +3,301 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>SMART WEB | Home</title>
-
+<title>SMART WEB | تسجيل الدخول</title>
 <style>
-
 :root{
- --bg:#050807;
- --panel:#0b1210;
- --panel2:#0f1915;
- --line:rgba(255,255,255,.09);
- --green:#9dff00;
- --green2:#3be477;
- --blue:#00a8ff;
- --text:#f4f8f5;
- --muted:#9aa9a1
+ --bg:#050807; --line:rgba(255,255,255,.09);
+ --green:#9dff00; --green2:#3be477; --blue:#00a8ff;
+ --text:#f4f8f5; --muted:#9aa9a1; --danger:#ff5d5d;
+ --accent:var(--green);
 }
-
-*{
- box-sizing:border-box;
- margin:0;
- padding:0
-}
-
-html{
- scroll-behavior:smooth
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
  background:
- radial-gradient(circle at 12% 15%,rgba(157,255,0,.07),transparent 27%),
- radial-gradient(circle at 90% 35%,rgba(0,168,255,.06),transparent 28%),
- linear-gradient(145deg,var(--bg),#020403);
+  radial-gradient(circle at 12% 15%,rgba(157,255,0,.08),transparent 30%),
+  radial-gradient(circle at 90% 80%,rgba(0,168,255,.08),transparent 30%),
+  linear-gradient(145deg,var(--bg),#020403);
  color:var(--text);
- min-height:100vh
+ min-height:100vh;
+ display:flex;flex-direction:column;
 }
+a{text-decoration:none;color:inherit}
 
-a{
- text-decoration:none;
- color:inherit
-}
+/* LOGO */
+.word-logo{direction:ltr;display:inline-flex;align-items:center;gap:6px;font-weight:950;font-size:30px;letter-spacing:-1.5px;line-height:1}
+.word-logo .smart{background:linear-gradient(135deg,#d9ff9c,#9dff00 50%,#44df6a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word-logo .web{background:linear-gradient(135deg,#a7edff,#22c7ff 55%,#527dff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word-logo:after{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
 
-.container{
- width:min(1180px,92%);
- margin:auto
-}
-
-
-/* =========================
-   SMART WEB LOGO
-========================= */
-
-.word-logo{
- direction:ltr;
- display:inline-flex;
- align-items:center;
- gap:2px;
- font-weight:950;
- font-size:31px;
- letter-spacing:-1.5px;
- line-height:1;
-}
-
-.word-logo .smart{
- background:linear-gradient(
-  135deg,
-  #d9ff9c,
-  #9dff00 50%,
-  #44df6a
- );
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent
-}
-
-.word-logo .web{
- background:linear-gradient(
-  135deg,
-  #a7edff,
-  #22c7ff 55%,
-  #527dff
- );
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent
-}
-
-.word-logo:after{
- content:"";
- width:7px;
- height:7px;
- border-radius:50%;
- background:var(--green);
- margin-left:5px;
- box-shadow:0 0 14px var(--green)
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
- position:sticky;
- top:0;
- z-index:20;
- background:rgba(4,8,6,.76);
- backdrop-filter:blur(18px);
- border-bottom:1px solid var(--line)
-}
-
-.nav{
- height:80px;
- display:flex;
- align-items:center;
- justify-content:space-between
-}
-
-.navlinks{
- display:flex;
- gap:7px
-}
-
-.navlinks a{
- padding:10px 16px;
- border-radius:999px;
- color:#d8e1dc;
- transition:.2s
-}
-
-.navlinks a:hover{
- background:rgba(157,255,0,.08);
- color:#fff
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
- text-align:center;
- padding:85px 0 55px
-}
-
-.hero-logo{
- margin-bottom:28px;
- display:inline-flex;
- animation:logoFloat 3.5s ease-in-out infinite
-}
-
-.hero-logo .word-logo{
- font-size:clamp(54px,10vw,112px);
- letter-spacing:-5px
-}
-
-@keyframes logoFloat{
-
- 0%,100%{
-  transform:translateY(0) rotate(0)
- }
-
- 50%{
-  transform:translateY(-9px) rotate(-.7deg)
- }
-
-}
-
-.eyebrow{
- color:var(--green);
- font-size:12px;
- font-weight:900;
- letter-spacing:4px;
- margin-bottom:14px
-}
-
-.hero h1{
- font-size:clamp(34px,6vw,68px);
- line-height:1.15;
- margin-bottom:16px
-}
-
-.hero h1 span{
- background:linear-gradient(
-  90deg,
-  #fff,
-  #caffb0,
-  #7dff00
- );
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent
-}
-
-.hero p{
- max-width:720px;
+/* LAYOUT */
+.wrap{
+ flex:1;
+ width:min(1180px,94%);
  margin:auto;
- color:var(--muted);
- line-height:1.9;
- font-size:16px
-}
-
-
-/* =========================
-   ANIMATED PHRASE
-   كلمة كلمة
-========================= */
-
-.assembled{
- margin:34px auto 0;
- min-height:55px;
-
- display:flex;
- justify-content:center;
+ display:grid;
+ grid-template-columns:1fr 1.1fr;
+ gap:44px;
  align-items:center;
-
- direction:rtl;
-
- gap:10px;
-
- white-space:nowrap;
-
- font-size:clamp(24px,3.5vw,36px);
- font-weight:900
+ padding:40px 0;
 }
 
+/* BRAND SIDE */
+.brand .word-logo{font-size:clamp(46px,7vw,84px);letter-spacing:-4px;animation:float 3.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.eyebrow{color:var(--green);font-size:12px;font-weight:900;letter-spacing:4px;margin:22px 0 12px}
+.brand h1{font-size:clamp(28px,4vw,46px);line-height:1.3;margin-bottom:14px}
+.brand h1 span{background:linear-gradient(90deg,#fff,#caffb0,#7dff00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand p{color:var(--muted);line-height:1.9;font-size:15px;max-width:480px}
+.assembled{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap;font-size:clamp(20px,2.6vw,28px);font-weight:900}
 .assembled .word{
- display:inline-block;
-
- opacity:0;
-
- transform:
-  translateY(18px)
-  scale(.75);
-
- background:linear-gradient(
-  135deg,
-  #ffffff,
-  #b9ff80,
-  #55dcff
- );
-
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent;
-
- animation:
-  wordSequence
-  3s
-  cubic-bezier(.2,.8,.2,1)
-  infinite;
-
- animation-delay:var(--d)
+ display:inline-block;opacity:0;
+ background:linear-gradient(135deg,#fff,#b9ff80,#55dcff);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ animation:wordSeq 4s cubic-bezier(.2,.8,.2,1) infinite;animation-delay:var(--d)
 }
-
-
-/*
-  كل كلمة تدخل ثم تظل ظاهرة
-  حتى نهاية دورة الـ 3 ثواني
-*/
-
-@keyframes wordSequence{
-
- 0%{
-  opacity:0;
-  transform:
-   translateY(18px)
-   scale(.75)
- }
-
- 8%{
-  opacity:1;
-  transform:
-   translateY(0)
-   scale(1)
- }
-
- 100%{
-  opacity:1;
-  transform:
-   translateY(0)
-   scale(1)
- }
-
+@keyframes wordSeq{
+ 0%{opacity:0;transform:translateY(16px) scale(.75)}
+ 8%,100%{opacity:1;transform:none}
 }
+.stats{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.stat{padding:12px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);font-size:13px;color:var(--muted)}
+.stat b{display:block;color:var(--text);font-size:17px;margin-bottom:2px}
 
-
-/* =========================
-   SERVICES
-========================= */
-
-.section-head{
- margin:25px 0 20px;
- display:flex;
- align-items:end;
- justify-content:space-between
-}
-
-.section-head h2{
- font-size:29px
-}
-
-.section-head p{
- color:var(--muted);
- font-size:13px
-}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:17px;
- padding-bottom:85px
-}
-
-.card{
- min-height:205px;
- padding:24px;
-
+/* LOGIN CARD */
+.login{
  border:1px solid var(--line);
- border-radius:25px;
-
- background:
- linear-gradient(
-  145deg,
-  rgba(255,255,255,.065),
-  rgba(255,255,255,.018)
- );
-
- box-shadow:
-  0 20px 60px rgba(0,0,0,.27);
-
- position:relative;
- overflow:hidden;
-
- transition:.28s;
-
- display:flex;
- flex-direction:column;
- justify-content:space-between
+ border-radius:30px;
+ padding:34px;
+ background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+ box-shadow:0 30px 90px rgba(0,0,0,.45);
+ position:relative;overflow:hidden;
 }
-
-.card:before{
- content:"";
- position:absolute;
-
- width:150px;
- height:150px;
-
- border-radius:50%;
-
- right:-70px;
- top:-70px;
-
- background:rgba(157,255,0,.09);
-
- filter:blur(40px)
+.login:before{
+ content:"";position:absolute;width:260px;height:260px;border-radius:50%;
+ left:-100px;top:-120px;background:var(--accent);opacity:.12;filter:blur(70px);transition:background .3s;
 }
+.login h2{font-size:25px;margin-bottom:6px;position:relative}
+.login .sub{color:var(--muted);font-size:13px;margin-bottom:22px;position:relative}
 
-.card:hover{
- transform:translateY(-8px);
+.label{font-size:13px;font-weight:700;color:#cfdad3;margin:0 0 10px;display:block;position:relative}
 
- border-color:
-  rgba(157,255,0,.3);
-
- box-shadow:
-  0 30px 75px rgba(0,0,0,.4),
-  0 0 30px rgba(157,255,0,.05)
-}
-
-.icon{
- width:52px;
- height:52px;
-
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;position:relative}
+.role{
+ cursor:pointer;
+ padding:14px 6px;
+ border:1px solid var(--line);
  border-radius:16px;
-
- display:grid;
- place-items:center;
-
- font-size:25px;
-
- background:
-  linear-gradient(
-   145deg,
-   rgba(157,255,0,.15),
-   rgba(0,168,255,.08)
-  );
-
- border:
-  1px solid rgba(157,255,0,.15)
+ background:rgba(255,255,255,.03);
+ color:var(--text);
+ font:inherit;font-size:12px;font-weight:700;
+ display:flex;flex-direction:column;align-items:center;gap:7px;
+ transition:.2s;
 }
-
-.card h3{
- font-size:20px;
- margin:22px 0 8px
+.role .ic{font-size:24px}
+.role:hover{transform:translateY(-3px);border-color:rgba(157,255,0,.3)}
+.role.active{
+ border-color:var(--accent);
+ background:color-mix(in srgb,var(--accent) 14%,transparent);
+ box-shadow:0 0 22px color-mix(in srgb,var(--accent) 22%,transparent);
 }
+.role:focus-visible,.btn:focus-visible,input:focus-visible,.eye:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.card p{
- color:var(--muted);
- font-size:13px;
- line-height:1.75
+.field{position:relative;margin-bottom:16px}
+.field input{
+ width:100%;height:52px;padding:0 48px 0 16px;
+ border-radius:14px;border:1px solid var(--line);
+ background:rgba(0,0,0,.35);color:var(--text);
+ font:inherit;font-size:15px;transition:.2s;
 }
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);outline:none}
+.field .fi{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:17px;opacity:.7;pointer-events:none}
+.field .eye{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);cursor:pointer;font-size:17px;padding:6px}
+.field.pw input{padding-left:44px}
+.field.err input{border-color:var(--danger)}
 
-.go{
- color:var(--green);
- font-size:13px;
- font-weight:850;
- margin-top:15px
+.row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 20px;font-size:13px;color:var(--muted);position:relative}
+.row label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.row input{accent-color:var(--green);width:16px;height:16px}
+.row a:hover{color:var(--green)}
+
+.btn{
+ width:100%;height:54px;border:0;border-radius:16px;cursor:pointer;
+ font:inherit;font-size:16px;font-weight:900;color:#06110a;
+ background:linear-gradient(135deg,var(--accent),#44df6a);
+ box-shadow:0 12px 34px color-mix(in srgb,var(--accent) 28%,transparent);
+ transition:.2s;position:relative;
 }
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.7;cursor:wait;transform:none}
+.msg{min-height:20px;margin-top:14px;font-size:13px;text-align:center;color:var(--danger);position:relative}
+.msg.ok{color:var(--green)}
 
+footer{border-top:1px solid var(--line);padding:20px 0;color:#89968f;font-size:13px}
+footer .in{width:min(1180px,94%);margin:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-/* =========================
-   FOOTER
-========================= */
-
-footer{
- border-top:1px solid var(--line);
- padding:28px 0;
- color:#89968f
-}
-
-.footer{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px
-}
-
-.footer strong{
- color:#dce7df
-}
-
-
-/* =========================
-   SERVICE PAGES
-========================= */
-
-.page{
- min-height:calc(100vh - 80px);
- padding:80px 0
-}
-
-.service{
- max-width:850px;
- margin:auto;
- text-align:center;
- padding:60px 30px;
-
- border:1px solid var(--line);
- border-radius:32px;
-
- background:
-  linear-gradient(
-   145deg,
-   rgba(255,255,255,.06),
-   rgba(255,255,255,.02)
-  );
-
- box-shadow:
-  0 25px 80px rgba(0,0,0,.35)
-}
-
-.service .big-icon{
- font-size:64px;
- margin-bottom:18px
-}
-
-.service h1{
- font-size:clamp(38px,6vw,60px);
- margin-bottom:15px
-}
-
-.service p{
- color:var(--muted);
- line-height:2;
- font-size:17px
-}
-
-.back{
- display:inline-block;
- margin-top:30px;
- padding:12px 25px;
-
- border-radius:999px;
-
- border:
-  1px solid rgba(157,255,0,.22);
-
- color:var(--green);
-
- background:
-  rgba(157,255,0,.07)
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
+/* TOP BAR */
+.top{width:min(1180px,94%);margin:auto;padding:22px 0 0;display:flex;justify-content:space-between;align-items:center}
+.top a.help{color:var(--muted);font-size:14px;padding:8px 16px;border-radius:999px;border:1px solid var(--line)}
+.top a.help:hover{color:#fff;border-color:rgba(157,255,0,.3)}
 
 @media(max-width:900px){
-
- .grid{
-  grid-template-columns:repeat(2,1fr)
- }
-
+ .wrap{grid-template-columns:1fr;gap:30px}
+ .brand{text-align:center}
+ .brand p{margin:auto}
+ .assembled,.stats{justify-content:center}
 }
-
-
-@media(max-width:560px){
-
- .nav{
-  height:70px
- }
-
- .navlinks a{
-  padding:8px 10px;
-  font-size:13px
- }
-
- .hero{
-  padding-top:55px
- }
-
- .grid{
-  grid-template-columns:1fr
- }
-
- .footer{
-  flex-direction:column;
-  text-align:center
- }
-
- .assembled{
-  gap:7px;
-  font-size:22px;
-  white-space:normal;
-  flex-wrap:wrap
- }
-
+@media(max-width:480px){
+ .login{padding:24px 18px}
+ .roles{grid-template-columns:repeat(2,1fr)}
 }
-
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.assembled .word{opacity:1}}
 </style>
 </head>
-
-
 <body>
 
+<div class="top">
+ <a href="welcome.html" class="word-logo" aria-label="SMART WEB"><span class="smart">SMART</span><span class="web">WEB</span></a>
+ <a class="help" href="support.html">💬 الدعم الفني</a>
+</div>
 
-<!-- =========================
-     HEADER
-========================= -->
+<main class="wrap">
 
-<header>
+ <!-- BRAND -->
+ <section class="brand">
+  <div class="word-logo"><span class="smart">SMART</span><span class="web">WEB</span></div>
+  <div class="eyebrow">HEALTHCARE MANAGEMENT PLATFORM</div>
+  <h1>منظومة متكاملة لإدارة <span>المستشفيات والعيادات</span></h1>
+  <p>سجّل دخولك واختر قسمك، وهتوصل مباشرة للنظام الخاص بتخصصك: حسابات، إدارة، أطباء، مخازن وأكتر.</p>
 
- <div class="container nav">
-
-  <a href="index.html" class="word-logo">
-   <span class="smart">SMART </span>
-   <span class="web"> WEB </span>
-  </a>
-
-  <nav class="navlinks">
-   <a href="#about">About</a>
-   <a href="#contact">Contact</a>
-  </nav>
-
- </div>
-
-</header>
-
-
-<main>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero" id="about">
-
- <div class="container">
-
-  <div class="hero-logo">
-
-   <div class="word-logo">
-    <span class="smart">SMART</span>
-    <span class="web">WEB</span>
-   </div>
-
+  <div class="assembled" aria-label="كل خدماتك في مكان واحد">
+   <span class="word" style="--d:0s">كل</span>
+   <span class="word" style="--d:.45s">خدماتك</span>
+   <span class="word" style="--d:.9s">في</span>
+   <span class="word" style="--d:1.35s">مكان</span>
+   <span class="word" style="--d:1.8s">واحد</span>
   </div>
 
-
-  <div class="eyebrow">
-   SMART DIGITAL PLATFORM
+  <div class="stats">
+   <div class="stat"><b>8</b>أقسام ونظم</div>
+   <div class="stat"><b>🔒</b>دخول آمن</div>
+   <div class="stat"><b>24/7</b>متاح دائماً</div>
   </div>
+ </section>
 
+ <!-- LOGIN -->
+ <section class="login">
+  <h2>تسجيل دخول الموظفين</h2>
+  <p class="sub">اختر القسم الخاص بك ثم أدخل بيانات حسابك</p>
 
-  <h1>
-   مرحباً بك في
-   <span>SMART WEB</span>
-  </h1>
+  <span class="label" id="roleLabel">القسم / التخصص</span>
+  <div class="roles" id="roles" role="radiogroup" aria-labelledby="roleLabel"></div>
 
-
-  <p>
-   منصة رقمية بسيطة تجمع أهم الخدمات في مكان واحد،
-   بتصميم عصري وسهل الاستخدام.
-  </p>
-
-
-  <!-- =========================
-       PHRASE
-       كل → خدماتك → في → مكان → واحد
-  ========================= -->
-
-  <div class="assembled">
-
-   <span class="word" style="--d:0s">
-    كل
-   </span>
-
-   <span class="word" style="--d:.45s">
-    خدماتك
-   </span>
-
-   <span class="word" style="--d:.90s">
-    في
-   </span>
-
-   <span class="word" style="--d:1.35s">
-    مكان
-   </span>
-
-   <span class="word" style="--d:1.80s">
-    واحد
-   </span>
-
-  </div>
-
-
- </div>
-
-</section>
-
-
-<!-- =========================
-     SERVICES
-========================= -->
-
-<section class="container" id="services">
-
-
- <div class="section-head">
-
-  <div>
-
-   <h2>
-    الخدمات
-   </h2>
-
-   <p>
-    اضغط على أي خدمة للانتقال إلى صفحتها
-   </p>
-
-  </div>
-
- </div>
-
-
- <div class="grid">
-
-
-  <!-- Pharmacy -->
-
-  <a class="card" href="http://localhost:4432/Hospital-PHP/index.php">
-
-   <div>
-
-    <div class="icon">
-     💊
-    </div>
-
-    <h3>
-     ادارة المستشفي 
-    </h3>
-
-    <p>
-     خدمات الصيدلية والمنتجات الصحية في واجهة بسيطة.
-    </p>
-
+  <form id="form" novalidate>
+   <div class="field" id="fUser">
+    <span class="fi">👤</span>
+    <input id="user" type="text" placeholder="اسم المستخدم أو الكود الوظيفي" autocomplete="username" required>
+   </div>
+   <div class="field pw" id="fPass">
+    <span class="fi">🔑</span>
+    <input id="pass" type="password" placeholder="كلمة المرور" autocomplete="current-password" required>
+    <button type="button" class="eye" id="eye" aria-label="إظهار كلمة المرور">👁</button>
    </div>
 
-   <div class="go">
-    استكشف الخدمة ←
+   <div class="row">
+    <label><input type="checkbox" id="remember"> تذكرني</label>
+    <a href="support.html">نسيت كلمة المرور؟</a>
    </div>
 
-  </a>
-
-
-  <!-- Treatment -->
-
-  <a class="card" href="management.html">
-
-   <div>
-
-    <div class="icon">
-     🩺
-    </div>
-
-    <h3>
-     نظام ادارة العيادة الطبية
-
-    </h3>
-
-    <p>
-نظام ادارة العيادة الطبية
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- accounting -->
-
-  <a class="card" href="http://localhost:8088/SMART%20CLINIC/accounting-login.php">
-
-   <div>
-
-    <div class="icon">
-     💳
-    </div>
-
-    <h3>
-    الحسابات
-    </h3>
-
-    <p>
-     إدارة ومتابعة العمليات والخدمات المالية بسهولة.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- Management -->
-
-  <a class="card" href="http://localhost:8088/SMART%20CLINIC/admin-dashboard.php">
-
-   <div>
-
-    <div class="icon">
-     📊
-    </div>
-
-    <h3>
-     الإدارة
-    </h3>
-
-    <p>
-     أدوات ذكية لتنظيم وإدارة الأعمال والعمليات.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- Doctor -->
-
-  <a class="card" href="doctor.html">
-
-   <div>
-
-    <div class="icon">
-     👨‍⚕️
-    </div>
-
-    <h3>
-     حجز طبيب
-    </h3>
-
-    <p>
-     الوصول إلى الطبيب المناسب وتنظيم المواعيد.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- Lab -->
-
-  <a class="card" href="http://localhost:4432/POS-IMS-CI/login">
-
-   <div>
-
-    <div class="icon">
-     🧪
-    </div>
-
-    <h3>
-     ادارة المخازن الطبية
-    </h3>
-
-    <p>
-     خدمات الفحوصات والتحاليل والمتابعة الطبية.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- Appointments -->
-
-  <a class="card" href="http://localhost:4432/EmployeeAttendance_CI/">
-
-   <div>
-
-    <div class="icon">
-     📅
-    </div>
-
-    <h3>
-     تسجيل الحضور 
-    </h3>
-
-    <p>
-     تنظيم المواعيد والحجوزات من مكان واحد.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
-  <!-- Support -->
-
-  <a class="card" href="support.html">
-
-   <div>
-
-    <div class="icon">
-     💬
-    </div>
-
-    <h3>
-     الدعم
-    </h3>
-
-    <p>
-     تواصل معنا واحصل على المساعدة عند الحاجة.
-    </p>
-
-   </div>
-
-   <div class="go">
-    استكشف الخدمة ←
-   </div>
-
-  </a>
-
-
- </div>
-
-</section>
+   <button class="btn" id="go" type="submit">دخول</button>
+   <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  </form>
+ </section>
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer id="contact">
-
- <div class="container footer">
-
-  <strong>
-   SMART WEB • Digital Services
-  </strong>
-
-  <div>
-   Copyright © 2030 Smart Web. All Rights Reserved.
-  </div>
-
+<footer>
+ <div class="in">
+  <strong>SMART WEB • Digital Services</strong>
+  <span>Copyright © 2030 Smart Web. All Rights Reserved.</span>
  </div>
-
 </footer>
 
+<script>
+/* الأقسام — عدّل الروابط من هنا */
+const DEPTS=[
+ {id:"hospital",   ic:"🏥", name:"إدارة المستشفى",  color:"#9dff00", url:"http://localhost:4432/Hospital-PHP/index.php"},
+ {id:"clinic",     ic:"🩺", name:"إدارة العيادة",    color:"#3be477", url:"management.html"},
+ {id:"doctor",     ic:"👨‍⚕️", name:"الأطباء",         color:"#00a8ff", url:"doctor.html"},
+ {id:"accounting", ic:"💳", name:"الحسابات",         color:"#ffc400", url:"http://localhost:8088/SMART%20CLINIC/accounting-login.php"},
+ {id:"inventory",  ic:"📦", name:"المخازن الطبية",   color:"#ff8a3d", url:"http://localhost:4432/POS-IMS-CI/login"},
+ {id:"attendance", ic:"📅", name:"الحضور والانصراف", color:"#b57bff", url:"http://localhost:4432/EmployeeAttendance_CI/"},
+ {id:"management", ic:"📊", name:"الإدارة العليا",   color:"#22c7ff", url:"management.html"},
+ {id:"support",    ic:"💬", name:"الدعم الفني",      color:"#ff6fae", url:"support.html"}
+];
 
+const $=id=>document.getElementById(id);
+const rolesEl=$("roles"), btn=$("go"), msg=$("msg");
+let current=null;
+
+DEPTS.forEach(d=>{
+ const b=document.createElement("button");
+ b.type="button"; b.className="role"; b.dataset.id=d.id;
+ b.setAttribute("role","radio"); b.setAttribute("aria-checked","false");
+ b.innerHTML=`<span class="ic">${d.ic}</span><span>${d.name}</span>`;
+ b.onclick=()=>select(d.id);
+ rolesEl.appendChild(b);
+});
+
+function select(id){
+ current=DEPTS.find(d=>d.id===id);
+ document.documentElement.style.setProperty("--accent",current.color);
+ rolesEl.querySelectorAll(".role").forEach(r=>{
+  const on=r.dataset.id===id;
+  r.classList.toggle("active",on);
+  r.setAttribute("aria-checked",on);
+ });
+ btn.textContent="دخول إلى "+current.name+" ←";
+ msg.textContent="";
+ try{localStorage.setItem("sw_dept",id)}catch(e){}
+}
+
+$("eye").onclick=()=>{
+ const p=$("pass"); const show=p.type==="password";
+ p.type=show?"text":"password";
+ $("eye").textContent=show?"🙈":"👁";
+};
+
+$("form").addEventListener("submit",e=>{
+ e.preventDefault();
+ msg.className="msg"; msg.textContent="";
+ const u=$("user").value.trim(), p=$("pass").value;
+ $("fUser").classList.toggle("err",!u);
+ $("fPass").classList.toggle("err",!p);
+
+ if(!current){msg.textContent="من فضلك اختر القسم أولاً";return}
+ if(!u||!p){msg.textContent="أدخل اسم المستخدم وكلمة المرور";return}
+
+ try{
+  if($("remember").checked) localStorage.setItem("sw_user",u);
+  else localStorage.removeItem("sw_user");
+ }catch(e){}
+
+ btn.disabled=true;
+ btn.textContent="جاري التحقق...";
+ msg.className="msg ok";
+ msg.textContent="تم — جاري تحويلك إلى "+current.name;
+ setTimeout(()=>{location.href=current.url},700);
+});
+
+/* استرجاع آخر اختيار */
+try{
+ const u=localStorage.getItem("sw_user");
+ if(u){$("user").value=u;$("remember").checked=true}
+ const d=localStorage.getItem("sw_dept");
+ if(d&&DEPTS.some(x=>x.id===d)) select(d);
+}catch(e){}
+</script>
 </body>
 </html>
