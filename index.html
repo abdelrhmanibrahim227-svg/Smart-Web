@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Web</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --g:#8cff00;
+  --b:#087cff;
+  --c:#00d9ff;
+}
+
+html,body{
+  min-height:100%;
+  background:#000;
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+body{overflow:hidden}
+
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  transition:opacity .8s,visibility .8s;
+}
+
+#loader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-box{
+  width:min(930px,94vw);
+  text-align:center;
+}
+
+/* الشعار */
+.logo-stage{
+  position:relative;
+  width:min(790px,92vw);
+  margin:auto;
+  overflow:hidden;
+  border-radius:14px;
+}
+
+.logo-stage img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.logo-base{opacity:.12}
+
+.logo-reveal{
+  position:absolute;
+  inset:0;
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path .18s linear;
+}
+
+.logo-reveal img{opacity:1}
+
+/* البكسلات */
+.s-pixels{
+  position:absolute;
+  left:8.5%;
+  top:4%;
+  width:27%;
+  height:40%;
+  pointer-events:none;
+}
+
+.pixel{
+  position:absolute;
+  width:clamp(14px,2.7vw,30px);
+  height:clamp(14px,2.7vw,30px);
+  background:linear-gradient(135deg,#b5ff00,#55d900 45%,#00a9ff);
+  box-shadow:0 0 14px rgba(108,255,0,.25);
+  opacity:0;
+  transform:translate(var(--x),var(--y)) scale(.15) rotate(12deg);
+  animation:pixelToS .55s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:var(--d);
+}
+
+.p1{--x:0;--y:0;--d:.15s}
+.p2{--x:52px;--y:0;--d:.22s}
+.p3{--x:104px;--y:0;--d:.29s}
+.p4{--x:26px;--y:34px;--d:.36s}
+.p5{--x:78px;--y:34px;--d:.43s}
+.p6{--x:130px;--y:34px;--d:.50s}
+.p7{--x:0;--y:68px;--d:.57s}
+.p8{--x:52px;--y:68px;--d:.64s}
+.p9{--x:104px;--y:68px;--d:.71s}
+.p10{--x:26px;--y:102px;--d:.78s}
+.p11{--x:78px;--y:102px;--d:.85s}
+.p12{--x:130px;--y:102px;--d:.92s}
+.p13{--x:0;--y:136px;--d:.99s}
+.p14{--x:52px;--y:136px;--d:1.06s}
+.p15{--x:104px;--y:136px;--d:1.13s}
+.p16{--x:26px;--y:170px;--d:1.20s}
+.p17{--x:78px;--y:170px;--d:1.27s}
+.p18{--x:130px;--y:170px;--d:1.34s}
+
+@keyframes pixelToS{
+  0%{
+    opacity:0;
+    transform:translate(
+      calc(var(--x) - 180px),
+      calc(var(--y) - 90px)
+    ) scale(.1) rotate(90deg);
+  }
+
+  65%{
+    opacity:1;
+    transform:translate(
+      calc(var(--x) + 8px),
+      calc(var(--y) - 5px)
+    ) scale(1.12) rotate(-5deg);
+  }
+
+  100%{
+    opacity:1;
+    transform:translate(var(--x),var(--y)) scale(1) rotate(0);
+  }
+}
+
+/* كلمة Smart Web */
+.word{
+  margin-top:12px;
+  direction:ltr;
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(1px,.45vw,7px);
+  width:100%;
+  font-size:clamp(34px,7vw,82px);
+  font-weight:900;
+  letter-spacing:clamp(1px,.45vw,7px);
+  white-space:nowrap;
+  overflow:visible;
+}
+
+.word span{
+  flex:0 0 auto;
+  display:inline-block;
+  opacity:0;
+  visibility:hidden;
+  background:linear-gradient(135deg,#9dff00,#29c700 45%,#087cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+
+/* JavaScript يتحكم في ظهور كل حرف */
+.word span.visible{
+  visibility:visible;
+  animation:letterIn .45s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes letterIn{
+  0%{
+    opacity:0;
+    transform:translateY(24px) scale(.65);
+  }
+  70%{
+    opacity:1;
+    transform:translateY(-3px) scale(1.08);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* النص السفلي */
+.sub{
+  margin-top:8px;
+  color:#8e989e;
+  font-size:12px;
+  letter-spacing:4px;
+}
+
+/* شريط التحميل */
+.progress{
+  width:min(620px,82vw);
+  height:7px;
+  margin:27px auto 11px;
+  border:1px solid rgba(0,217,255,.35);
+  border-radius:99px;
+  overflow:hidden;
+  background:#080b0c;
+}
+
+#bar{
+  height:100%;
+  width:0;
+  border-radius:99px;
+  background:linear-gradient(90deg,#25d400,#a4ff00,#00b7ff,#087cff);
+  box-shadow:0 0 16px rgba(0,217,255,.65);
+}
+
+.percent{
+  font-size:12px;
+  letter-spacing:3px;
+  color:#bfc7ca;
+}
+
+/* الصفحة الرئيسية الاحتياطية */
+#home{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  opacity:0;
+  transform:scale(1.04);
+  transition:opacity 1s,transform 1s;
+}
+
+#home.show{
+  opacity:1;
+  transform:none;
+}
+
+.card{
+  width:min(850px,94vw);
+  min-height:520px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:45px 25px;
+  border:1px solid rgba(0,217,255,.22);
+  border-radius:34px;
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  box-shadow:0 25px 100px rgba(0,0,0,.65);
+  position:relative;
+  overflow:hidden;
+}
+
+.home-logo{
+  width:min(390px,75vw);
+  border-radius:14px;
+}
+
+h1{
+  font-size:clamp(32px,6vw,64px);
+  margin:6px 0 10px;
+  background:linear-gradient(90deg,#9dff00,#27d100,#078cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.welcome{
+  font-size:clamp(18px,3vw,28px);
+  margin-bottom:8px;
+}
+
+.desc{
+  color:#9da7ad;
+  max-width:570px;
+  line-height:1.8;
+  font-size:15px;
+  margin-bottom:28px;
+}
+
+.enter{
+  border:0;
+  color:#031000;
+  cursor:pointer;
+  padding:14px 42px;
+  border-radius:999px;
+  font-size:17px;
+  font-weight:900;
+  background:linear-gradient(90deg,#79ff00,#b1ff22);
+  box-shadow:0 0 28px rgba(119,255,0,.28);
+  transition:.25s;
+}
+
+.enter:hover{
+  transform:translateY(-3px) scale(1.03);
+}
+
+@media(max-width:600px){
+  .sub{letter-spacing:2px}
+  .card{min-height:470px}
+
+  .s-pixels{
+    left:4%;
+    top:2%;
+    transform:scale(.72);
+    transform-origin:top left;
+  }
+
+  .word{
+    font-size:clamp(32px,8.5vw,48px);
+    letter-spacing:1px;
+    gap:1px;
+  }
+}
+
+/* عند تفعيل تقليل الحركة، تظهر الحروف كاملة */
+@media(prefers-reduced-motion:reduce){
+  .pixel{animation:none;opacity:1;transform:none}
+  .word span{
+    animation:none!important;
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+  .logo-reveal{clip-path:none}
+}
+</style>
+</head>
+
+<body>
+
+<section id="loader">
+  <div class="loader-box">
+
+    <div class="logo-stage">
+      <img class="logo-base" src="smart-web-logo.jpg" alt="Smart Web">
+
+      <div class="s-pixels" aria-hidden="true">
+        <i class="pixel p1"></i>
+        <i class="pixel p2"></i>
+        <i class="pixel p3"></i>
+        <i class="pixel p4"></i>
+        <i class="pixel p5"></i>
+        <i class="pixel p6"></i>
+        <i class="pixel p7"></i>
+        <i class="pixel p8"></i>
+        <i class="pixel p9"></i>
+        <i class="pixel p10"></i>
+        <i class="pixel p11"></i>
+        <i class="pixel p12"></i>
+        <i class="pixel p13"></i>
+        <i class="pixel p14"></i>
+        <i class="pixel p15"></i>
+        <i class="pixel p16"></i>
+        <i class="pixel p17"></i>
+        <i class="pixel p18"></i>
+      </div>
+
+      <div class="logo-reveal" id="logoReveal">
+        <img src="smart-web-logo.jpg" alt="">
+      </div>
+    </div>
+
+    <!-- الحروف تظهر بالترتيب من خلال JavaScript -->
+    <div class="word" id="animatedWord" aria-label="Smart Web">
+      <span>S</span>
+      <span>m</span>
+      <span>a</span>
+      <span>r</span>
+      <span>t</span>
+      <span>&nbsp;</span>
+      <span>W</span>
+      <span>e</span>
+      <span>b</span>
+    </div>
+
+    <div class="sub">SMART DIGITAL EXPERIENCE</div>
+
+    <div class="progress">
+      <div id="bar"></div>
+    </div>
+
+    <div class="percent">
+      <span id="pct">0</span>% LOADING
+    </div>
+
+  </div>
+</section>
+
+<main id="home">
+  <div class="card">
+    <img class="home-logo" src="smart-web-logo.jpg" alt="Smart Web Logo">
+    <h1>Smart Web</h1>
+    <div class="welcome">مرحباً بك 👋</div>
+    <p class="desc">
+      أهلاً بك في منصة Smart Web — تجربة رقمية عصرية وسريعة.
+    </p>
+  </div>
+</main>
+
+<script>
+(() => {
+  const bar = document.getElementById("bar");
+  const pct = document.getElementById("pct");
+  const reveal = document.getElementById("logoReveal");
+  const loader = document.getElementById("loader");
+  const word = document.getElementById("animatedWord");
+  const letters = Array.from(word.querySelectorAll("span"));
+
+  let progress = 0;
+  let letterIndex = 0;
+
+  /*
+   * إظهار الحروف واحداً تلو الآخر.
+   * نضمن ظهور حرف t ثم نكمل المسافة وWeb.
+   */
+  function showNextLetter() {
+    if (letterIndex >= letters.length) {
+      // تأكيد أن جميع الحروف ظاهرة بالكامل
+      letters.forEach(letter => {
+        letter.classList.add("visible");
+        letter.style.visibility = "visible";
+        letter.style.opacity = "1";
+        letter.style.transform = "none";
+      });
+      return;
+    }
+
+    const letter = letters[letterIndex];
+
+    letter.style.visibility = "visible";
+    letter.classList.add("visible");
+
+    letterIndex++;
+
+    // فاصل زمني بين كل حرف والذي يليه
+    setTimeout(showNextLetter, 280);
+  }
+
+  // بدء أنيميشن الكلمة بعد تجمّع البكسلات
+  setTimeout(showNextLetter, 900);
+
+  // شريط التحميل
+  const timer = setInterval(() => {
+    progress = Math.min(progress + 1.65, 100);
+
+    bar.style.width = progress + "%";
+    pct.textContent = Math.floor(progress);
+
+    // كشف الشعار تدريجياً
+    const revealAmount = Math.max(0, progress - 18);
+    reveal.style.clipPath =
+      `inset(0 ${100 - revealAmount}% 0 0)`;
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      bar.style.width = "100%";
+      pct.textContent = "100";
+
+      // تأكيد اكتمال الكلمة قبل الانتقال
+      letters.forEach(letter => {
+        letter.classList.add("visible");
+        letter.style.visibility = "visible";
+        letter.style.opacity = "1";
+        letter.style.transform = "none";
+      });
+
+      // الانتقال إلى الصفحة التالية بعد 5 ثوانٍ
+      setTimeout(() => {
+        window.location.href = "welcome.html";
+      }, 5000);
+    }
+  }, 90);
+
+})();
+</script>
+
+</body>
+</html>
